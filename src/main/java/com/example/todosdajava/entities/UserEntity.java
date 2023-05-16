@@ -22,6 +22,9 @@ public class UserEntity {
     @Column(name="first_name", nullable = false)
     private String firstName;
 
+    @Column(name="last_name", nullable = false)
+    private String lastName;
+
     @Column(name="password", nullable = false)
     private String password;
 
@@ -37,4 +40,20 @@ public class UserEntity {
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="user_role", joinColumns = @JoinColumn(name="user_id"), inverseJoinColumns = @JoinColumn(name="role_id"))
     private Set<RoleEntity> roles;
+
+    public UserEntity(
+            String email,
+            String username,
+            String firstName,
+            String lastName,
+            String password,
+            boolean active
+    ) {
+        this.email = email;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+        this.active = active;
+    }
 }

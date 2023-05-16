@@ -3,7 +3,9 @@ package com.example.todosdajava.auth;
 import com.example.todosdajava.services.CustomUserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -43,7 +45,7 @@ public class SecurityConfiguration {
     }
 
     @Bean
-    public SecurityFilterChain securityConfiguration(HttpSecurity http) throws Exception {
+    public SecurityFilterChain configuration(HttpSecurity http) throws Exception {
         http
                 .csrf()
                 .disable()
@@ -57,5 +59,9 @@ public class SecurityConfiguration {
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         return http.build();
+    }
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception{
+        return authenticationConfiguration.getAuthenticationManager();
     }
 }
